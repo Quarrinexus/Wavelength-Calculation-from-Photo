@@ -9,14 +9,14 @@ width_of_screen = 31.2-1.6 # in cm
 delta_width = 0.5 # uncertainty in width of screen in cm (to be discussed)
 L = 492.9 # distance from slits to screen in cm
 delta_L = 1.6 # uncertainty in L in cm
-d = 0.1002 # slit separation in mm (0.4 or 0.2005 or 0.1002 depending on dataset)
-delta_d = 0.0001 # uncertainty in d in mm (0.0003 or 0.0001 depending on dataset)
-pixel_detection_uncertainty = 0.5  # pixels (uncertainty in locating peak centers)
+d = 0.2005 # slit separation in mm (0.2005 or 0.1002 depending on dataset)
+delta_d = 0.0003 # uncertainty in d in mm (0.0003 or 0.0001 depending on dataset)
+pixel_detection_uncertainty = 1  # pixels (uncertainty in locating peak centers)
 
 dataset = 1 # which dataset to analyze (1-n, corresponding to Filtered_Image_1.jpeg to Filtered_Image_n.jpeg)
-min_width = 22
-min_height = 0
-data_crop_distance = 10 # distance in cm to crop from each side of the image to remove noise
+min_width = 22 # minimum width of peaks in pixels (to be changed manually)
+min_height = 0 # minimum height of peaks as a fraction of the central maximum (to be changed manually)
+data_crop_distance = 10 # distance in cm to crop from each side of the image to remove noise (to be changed manually)
 
 print(f"Analyzing dataset {dataset} with parameters: min_width={min_width}, min_height={min_height}, data_crop_distance={data_crop_distance} cm")
 
