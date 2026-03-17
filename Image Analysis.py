@@ -14,17 +14,13 @@ delta_d = 0.0001 # uncertainty in d in mm (0.0003 or 0.0001 depending on dataset
 pixel_detection_uncertainty = 0.5  # pixels (uncertainty in locating peak centers)
 
 dataset = 1 # which dataset to analyze (1-n, corresponding to Filtered_Image_1.jpeg to Filtered_Image_n.jpeg)
-single_slit = False # (remnant and unnecessary) whether this is a single slit dataset (True) or double slit (False)
 min_width = 22
 min_height = 0
 data_crop_distance = 10 # distance in cm to crop from each side of the image to remove noise
 
-print(f"Analyzing dataset {dataset} with {'single slit' if single_slit else 'double slit'} configuration...")
+print(f"Analyzing dataset {dataset} with parameters: min_width={min_width}, min_height={min_height}, data_crop_distance={data_crop_distance} cm")
 
-if single_slit:
-    img = io.imread(f'Single Slit/Filtered_Images/Filtered_Image_{dataset}.jpeg', as_gray=True)
-else:
-    img = io.imread(f'Filtered_Images/Filtered_Image_{dataset}.jpeg', as_gray=True)
+img = io.imread(f'Filtered_Images/Filtered_Image_{dataset}.jpeg', as_gray=True)
 
 intensity_profile = np.sum(img, axis=0)  # sum over cols for every x to get horizontal intensity
 x_axis = np.arange(len(intensity_profile))
@@ -60,10 +56,7 @@ for peak in peaks:
     pd = cropped_distance_axis[peak]
     plt.axvline(x=cropped_distance_axis[peak], color='r', linestyle='--')
 
-if single_slit:
-    plt.savefig(f"Single Slit/Intensity Graphs/Intensity_Profile_Dataset_{dataset}.png")
-else:
-    plt.savefig(f"Intensity Graphs/Intensity_Profile_Dataset_{dataset}.png")
+plt.savefig(f"Intensity Graphs/Intensity_Profile_Dataset_{dataset}.png")
 print(f"Saved intensity profile graph for dataset {dataset}")
 
 plt.show()
@@ -94,10 +87,7 @@ plt.ylabel('sin(θ)')
 plt.title('Order of Peaks vs sin(θ)')
 plt.legend()
 
-if single_slit:
-    plt.savefig(f"Single Slit/Lambda Calculation Graphs/Order_vs_SinTheta_Dataset_{dataset}.png")
-else:
-    plt.savefig(f"Lambda Calculation Graphs/Order_vs_SinTheta_Dataset_{dataset}.png")
+plt.savefig(f"Lambda Calculation Graphs/Order_vs_SinTheta_Dataset_{dataset}.png")
 print(f"Saved graph for dataset {dataset}")
 
 plt.show()
@@ -111,10 +101,9 @@ import csv
 
 # Read existing data
 data = []
-if not single_slit:
-    with open('Data.csv', 'r', newline='') as file:
-        reader = csv.reader(file)
-        data = list(reader)
+with open('Data.csv', 'r', newline='') as file:
+    reader = csv.reader(file)
+    data = list(reader)
 
 # Find if dataset exists and update, or append if not
 found = False
@@ -127,9 +116,8 @@ if not found:
     data.append([dataset, wavelength, delta_wavelength])
 
 # Write back the updated data
-if not single_slit:
-    with open('Data.csv', 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerows(data)
+with open('Data.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
 
 print(f"Saved wavelength data for dataset {dataset} to Data.csv")
