@@ -24,7 +24,7 @@ def apply_filter(img, n, threshold=0.5, threshold_max=1):
         io.imsave(f'Filtered_Images/Filtered_Image_{n}.jpeg', output)
 
 # Loop through images and apply filter
-for n in range(1, 16):
+for n in range(1, 14):
     if single_slit:
         img = io.imread(f'Single Slit/Images/Image_{n}.jpeg', as_gray=True)
     else:

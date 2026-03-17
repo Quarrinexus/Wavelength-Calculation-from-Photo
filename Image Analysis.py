@@ -14,7 +14,7 @@ delta_d = 0.0001 # uncertainty in d in mm (0.0003 or 0.0001 depending on dataset
 pixel_detection_uncertainty = 0.5  # pixels (uncertainty in locating peak centers)
 
 dataset = 15 # which dataset to analyze (1-n, corresponding to Filtered_Image_1.jpeg to Filtered_Image_n.jpeg)
-single_slit = False # whether this is a single slit dataset (True) or double slit (False)
+single_slit = False # (remnant and unnecessary) whether this is a single slit dataset (True) or double slit (False)
 min_width = 22
 min_height = 0
 data_crop_distance = 10 # distance in cm to crop from each side of the image to remove noise
